@@ -1,0 +1,4 @@
+#search-field {
+  flex: 0 1 30rem;
+  color: var(--clr-text-dark);
+}

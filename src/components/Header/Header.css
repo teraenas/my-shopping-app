@@ -1,0 +1,35 @@
+.header {
+  border-bottom: 1px solid var(--clr-text-light);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: var(--padding) 0;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-family: 'Bree Serif', serif;
+  color: var(--clr-theme);
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.6rem;
+  font-weight: 500;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: var(--clr-text-dark);
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--clr-theme);
+}

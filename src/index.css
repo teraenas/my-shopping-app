@@ -1,0 +1,43 @@
+:root {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+
+  --clr-text-dark: rgb(65, 65, 65);
+  --clr-text-light: rgb(192, 192, 192);
+  --clr-theme: rgb(8, 114, 214);
+
+  --padding: 1.8rem;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: rgb(243, 243, 243);
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.container {
+  width: min(80rem, 100%);
+  margin-inline: auto;
+}

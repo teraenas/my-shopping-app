@@ -1,0 +1,17 @@
+.cart-page .container {
+  padding: 2rem 0;
+}
+
+.cart-page__item-thumb {
+  width: 160px;
+  height: 160px;
+  padding: 0.3rem;
+  object-fit: contain;
+  background-color: white;
+}
+
+.cart-page h1 {
+  font-size: 4rem;
+  font-weight: 400;
+  color: var(--clr-text-dark);
+}
