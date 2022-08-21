@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './Home.css';
 
-function Home(props) {
-  if (!props.error)
+function Home({ searchTerm, productList, error }) {
+  if (!error)
     return (
       <section className="product-page">
         <div className="container">
-          {props.productList
+          {productList
             .filter(product =>
-              product.title
-                .toLowerCase()
-                .includes(props.searchTerm.toLowerCase())
+              product.title.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .map(product => (
               <ProductCard key={product.id} product={product} />
@@ -19,7 +17,11 @@ function Home(props) {
         </div>
       </section>
     );
-  return <div>{props.error}</div>;
+  return (
+    <section className="product-page">
+      <div className="container">{error}</div>
+    </section>
+  );
 }
 
 export default Home;

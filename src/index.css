@@ -40,4 +40,5 @@ input {
 .container {
   width: min(80rem, 100%);
   margin-inline: auto;
+  padding: 0 1rem;
 }

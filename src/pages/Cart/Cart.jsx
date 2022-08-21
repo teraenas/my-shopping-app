@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { DeleteForever, ShoppingCartCheckout } from '@mui/icons-material';
 import { useCart } from '../../components/Cart/Cart';
+import CartItem from '../../components/CartItem/CartItem';
 import './Cart.css';
 
 function Cart() {
@@ -26,9 +27,9 @@ function Cart() {
     return qty * unit;
   }
 
-  function createRow(image, desc, qty, unit) {
+  function createRow(id, image, title, desc, qty, unit) {
     const price = priceRow(qty, unit);
-    return { image, desc, qty, unit, price };
+    return { id, image, title, desc, qty, unit, price };
   }
 
   function subtotal(items) {
@@ -37,14 +38,14 @@ function Cart() {
 
   const rows = cart.map(item =>
     createRow(
+      item.product.id,
       item.product.image,
+      item.product.title,
       item.product.description,
       item.quantity,
       item.product.price
     )
   );
-
-  console.log(rows);
 
   const invoiceSubtotal = subtotal(rows);
   const invoiceTaxes = TAX_RATE * invoiceSubtotal;
@@ -64,7 +65,7 @@ function Cart() {
       <div className="container">
         <h1>Your Cart</h1>
         <TableContainer>
-          <Table sx={{ minWidth: 620 }} aria-label="spanning table">
+          <Table sx={{ minWidth: 700 }} aria-label="spanning table">
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={4}>
@@ -74,22 +75,14 @@ function Cart() {
               </TableRow>
               <TableRow>
                 <TableCell colSpan={2}>Desc</TableCell>
-                <TableCell align="right">Qty.</TableCell>
+                <TableCell align="center">Qty.</TableCell>
                 <TableCell align="right">Unit</TableCell>
                 <TableCell align="right">Sum</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map(row => (
-                <TableRow key={row.desc}>
-                  <TableCell>
-                    <img className="cart-page__item-thumb" src={row.image} />
-                  </TableCell>
-                  <TableCell>{row.desc}</TableCell>
-                  <TableCell align="right">{row.qty}</TableCell>
-                  <TableCell align="right">{row.unit}</TableCell>
-                  <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-                </TableRow>
+                <CartItem key={row.id} item={row} ccyFormat={ccyFormat} />
               ))}
             </TableBody>
           </Table>

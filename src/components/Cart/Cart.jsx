@@ -17,14 +17,24 @@ export const CartProvider = ({ children }) => {
       setCart([...cart, { product: newProduct, quantity: qty }]);
     } else {
       setCart(
-        cart.map(item => {
-          if (item.product.id === newProduct.id) {
-            return { ...item, quantity: item.quantity + qty };
-          }
-          return item;
-        })
+        cart.map(item =>
+          item.product.id === newProduct.id
+            ? { ...item, quantity: item.quantity + qty }
+            : item
+        )
       );
     }
+  };
+
+  const updateItemCount = (id, qty) =>
+    setCart(
+      cart.map(item =>
+        item.product.id === id ? { ...item, quantity: qty } : item
+      )
+    );
+
+  const removeItem = id => {
+    setCart(cart.filter(item => item.product.id !== id));
   };
 
   const clearCart = () => setCart([]);
@@ -42,7 +52,15 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartStateContext.Provider
-      value={{ cart, uniqueItems, totalItems, addItem, clearCart }}
+      value={{
+        cart,
+        uniqueItems,
+        totalItems,
+        addItem,
+        clearCart,
+        updateItemCount,
+        removeItem,
+      }}
     >
       {children}
     </CartStateContext.Provider>

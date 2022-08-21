@@ -1,12 +1,12 @@
 import React from 'react';
-import { useCart } from '../Cart/Cart';
 import { Link, NavLink } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
+import { useCart } from '../Cart/Cart';
 import SearchField from '../SearchField/SearchField';
 import './Header.css';
 
-function Header(props) {
+function Header({ displaySeachField, setSearchTerm }) {
   const { totalItems } = useCart();
 
   return (
@@ -15,9 +15,7 @@ function Header(props) {
         <Link to="/" className="logo">
           shopApp
         </Link>
-        {props.displaySeachField && (
-          <SearchField setSearchTerm={props.setSearchTerm} />
-        )}
+        {displaySeachField && <SearchField setSearchTerm={setSearchTerm} />}
         <nav className="main-nav">
           <NavLink
             to="/"

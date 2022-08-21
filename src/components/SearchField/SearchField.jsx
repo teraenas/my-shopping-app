@@ -3,11 +3,11 @@ import { Input, InputAdornment, FormControl } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
 import './SearchField.css';
 
-function SearchField(props) {
+function SearchField({ setSearchTerm }) {
   const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
-    props.setSearchTerm(searchInput);
+    setSearchTerm(searchInput);
   }, [searchInput]);
 
   return (

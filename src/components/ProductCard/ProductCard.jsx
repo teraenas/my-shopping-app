@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardMedia,
@@ -6,13 +6,13 @@ import {
   Typography,
   CardActions,
   Button,
-  ButtonGroup,
 } from '@mui/material';
-import { AddShoppingCart, Add, Remove } from '@mui/icons-material';
+import { AddShoppingCart } from '@mui/icons-material';
 import { useCart } from '../Cart/Cart';
+import ItemQuantityInput from '../ItemQuantityInput/ItemQuantityInput';
 import './ProductCard.css';
 
-function ProductCard(props) {
+function ProductCard({ product }) {
   const { addItem } = useCart();
   const [itemCount, setItemCount] = useState(1);
 
@@ -22,11 +22,7 @@ function ProductCard(props) {
       variant="standard"
       sx={{ display: 'flex', flexDirection: 'column' }}
     >
-      <CardMedia
-        component="img"
-        image={props.product.image}
-        alt={props.product.title}
-      />
+      <CardMedia component="img" image={product.image} alt={product.title} />
       <CardContent
         sx={{
           flex: 1,
@@ -35,14 +31,14 @@ function ProductCard(props) {
         }}
       >
         <Typography gutterBottom variant="h5" component="div">
-          ${props.product.price}
+          ${product.price}
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ marginBlockEnd: '1.2rem' }}
         >
-          {props.product.title}
+          {product.title}
         </Typography>
         <CardActions
           sx={{
@@ -52,35 +48,17 @@ function ProductCard(props) {
             marginBlockStart: 'auto',
           }}
         >
-          <ButtonGroup size="small">
-            <Button
-              variant="contained"
-              disableElevation
-              color="info"
-              onClick={() =>
-                itemCount > 1 ? setItemCount(itemCount - 1) : itemCount
-              }
-              sx={{ padding: 0 }}
-            >
-              <Remove />
-            </Button>
-            <Button sx={{ color: 'var(--clr-text-dark) !important' }} disabled>
-              {itemCount}
-            </Button>
-            <Button
-              variant="contained"
-              disableElevation
-              color="info"
-              onClick={() => setItemCount(itemCount + 1)}
-              sx={{ padding: 0 }}
-            >
-              <Add />
-            </Button>
-          </ButtonGroup>
+          <ItemQuantityInput
+            itemCount={itemCount}
+            setItemCount={setItemCount}
+          />
           <Button
             variant="contained"
             fullWidth
-            onClick={() => addItem(props.product, itemCount)}
+            onClick={() => {
+              addItem(product, itemCount);
+              setItemCount(1);
+            }}
             endIcon={<AddShoppingCart />}
           >
             ADD TO CART
