@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Stack, TableCell, TableRow, IconButton } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
-import { useCart } from '../Cart/Cart';
+import { useCart } from '../CartProvider/CartProvider';
 import ItemQuantityInput from '../ItemQuantityInput/ItemQuantityInput';
 
 function CartItem({ item, ccyFormat }) {

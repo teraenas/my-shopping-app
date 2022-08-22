@@ -10,7 +10,7 @@ import {
   Stack,
 } from '@mui/material';
 import { DeleteForever, ShoppingCartCheckout } from '@mui/icons-material';
-import { useCart } from '../../components/Cart/Cart';
+import { useCart } from '../../components/CartProvider/CartProvider';
 import CartItem from '../../components/CartItem/CartItem';
 import './Cart.css';
 
@@ -36,14 +36,14 @@ function Cart() {
     return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
   }
 
-  const rows = cart.map(item =>
+  const rows = cart.map(({ product, quantity }) =>
     createRow(
-      item.product.id,
-      item.product.image,
-      item.product.title,
-      item.product.description,
-      item.quantity,
-      item.product.price
+      product.id,
+      product.image,
+      product.title,
+      product.description,
+      quantity,
+      product.price
     )
   );
 

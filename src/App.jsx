@@ -3,6 +3,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
+import Account from './pages/Account/Account';
+import LogIn from './pages/LogIn/LogIn';
 import './App.css';
 
 function App() {
@@ -42,6 +44,9 @@ function App() {
           }
         />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/*" element={<h1>Not Found</h1>} />
       </Routes>
     </div>
   );

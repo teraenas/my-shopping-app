@@ -2,12 +2,14 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
-import { useCart } from '../Cart/Cart';
+import { useCart } from '../CartProvider/CartProvider';
+import { useUser } from '../../user/UserProvider';
 import SearchField from '../SearchField/SearchField';
 import './Header.css';
 
 function Header({ displaySeachField, setSearchTerm }) {
   const { totalItems } = useCart();
+  const { user } = useUser();
 
   return (
     <header className="header">
@@ -24,6 +26,14 @@ function Header({ displaySeachField, setSearchTerm }) {
             }
           >
             Home
+          </NavLink>
+          <NavLink
+            to={user ? '/account' : '/login'}
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            {user ? 'My Account' : 'Sign In'}
           </NavLink>
           <NavLink
             to="/cart"

@@ -7,7 +7,7 @@ const getCart = () => {
   return savedCart ? savedCart : [];
 };
 
-export const CartProvider = ({ children }) => {
+function CartProvider({ children }) {
   const [cart, setCart] = useState(getCart());
   const [uniqueItems, setUniqueItems] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -39,10 +39,8 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
-  const getTotalItems = () => {
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    return totalItems;
-  };
+  const getTotalItems = () =>
+    cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -65,6 +63,10 @@ export const CartProvider = ({ children }) => {
       {children}
     </CartStateContext.Provider>
   );
-};
+}
 
-export const useCart = () => useContext(CartStateContext);
+function useCart() {
+  return useContext(CartStateContext);
+}
+
+export { useCart, CartProvider };

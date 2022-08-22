@@ -8,7 +8,7 @@ import {
   Button,
 } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
-import { useCart } from '../Cart/Cart';
+import { useCart } from '../CartProvider/CartProvider';
 import ItemQuantityInput from '../ItemQuantityInput/ItemQuantityInput';
 import './ProductCard.css';
 
