@@ -1,0 +1,9 @@
+.footer {
+  margin-block-start: auto;
+  border-top: 1px solid var(--clr-text-light);
+}
+
+.footer .container {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}

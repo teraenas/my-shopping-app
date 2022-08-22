@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { ShoppingCartOutlined } from '@mui/icons-material';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { ShoppingCartOutlined, Person } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import { useCart } from '../CartProvider/CartProvider';
 import { useUser } from '../../user/UserProvider';
 import SearchField from '../SearchField/SearchField';
 import './Header.css';
 
-function Header({ displaySeachField, setSearchTerm }) {
+function Header() {
+  const { pathname } = useLocation();
   const { totalItems } = useCart();
   const { user } = useUser();
 
@@ -17,7 +18,7 @@ function Header({ displaySeachField, setSearchTerm }) {
         <Link to="/" className="logo">
           shopApp
         </Link>
-        {displaySeachField && <SearchField setSearchTerm={setSearchTerm} />}
+        {pathname === '/' && <SearchField />}
         <nav className="main-nav">
           <NavLink
             to="/"
@@ -33,6 +34,7 @@ function Header({ displaySeachField, setSearchTerm }) {
               isActive ? 'nav-link active' : 'nav-link'
             }
           >
+            <Person sx={{ marginRight: '0.2rem' }} />
             {user ? 'My Account' : 'Sign In'}
           </NavLink>
           <NavLink

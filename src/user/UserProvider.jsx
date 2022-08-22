@@ -15,8 +15,13 @@ function UserProvider({ children }) {
   const logIn = async (email, pass) => {
     const user = userQuery;
     if (email === user.email && pass === user.password) {
+      setError(null);
       setUser(user);
     } else setError('Invalid email or password.');
+  };
+
+  const logOut = () => {
+    setUser(null);
   };
 
   useEffect(() => {
@@ -24,7 +29,7 @@ function UserProvider({ children }) {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, logIn, error }}>
+    <UserContext.Provider value={{ user, logIn, logOut, error, setError }}>
       {children}
     </UserContext.Provider>
   );

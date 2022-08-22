@@ -1,8 +1,11 @@
 import React from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { useSearch } from '../../components/SearchProvider/SearchProvider';
 import './Home.css';
 
-function Home({ searchTerm, productList, error }) {
+function Home({ productList, error }) {
+  const { searchTerm } = useSearch();
+
   if (!error)
     return (
       <section className="product-page">

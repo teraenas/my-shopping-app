@@ -8,8 +8,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 4rem;
-  padding-top: var(--padding);
-  padding-bottom: var(--padding);
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .logo {

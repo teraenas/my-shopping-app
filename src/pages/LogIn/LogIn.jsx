@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import {
   FormControl,
   InputLabel,
@@ -9,12 +9,15 @@ import {
   TextField,
   Box,
   Button,
+  Alert,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useUser } from '../../user/UserProvider';
+import './LogIn.css';
 
 function LogIn() {
-  const { user, logIn, error } = useUser();
+  const { state } = useLocation();
+  const { user, logIn, error, setError } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -26,21 +29,24 @@ function LogIn() {
     await logIn(email, password);
   };
 
+  useEffect(() => setError(null), []);
+
+  if (user) return <Navigate to={state?.from || '/'} replace />;
   return (
     <section className="login-page">
       <div className="container">
-        {user && <Navigate to="/" replace />}
-        {error && <p>{error}</p>}
-        <Box component="form">
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+        <Box component="form" className="login-form">
+          <h1>Sign in</h1>
+          {error && <Alert severity="error">{error}</Alert>}
+          <FormControl sx={{ m: 1 }} variant="standard">
             <TextField
               id="email-input"
-              label="Standard"
+              label="Email"
               variant="standard"
               onChange={e => setEmail(e.target.value)}
             />
           </FormControl>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+          <FormControl sx={{ m: 1 }} variant="standard">
             <InputLabel htmlFor="password-input">Password</InputLabel>
             <Input
               id="password-input"
@@ -65,6 +71,7 @@ function LogIn() {
               size="large"
               type="submit"
               onClick={async e => await handleLogin(e)}
+              sx={{ marginBlockStart: '2rem' }}
             >
               Login
             </Button>

@@ -6,8 +6,6 @@
   --clr-text-light: rgb(192, 192, 192);
   --clr-theme: rgb(8, 114, 214);
 
-  --padding: 1.8rem;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -29,7 +27,6 @@ a {
 body {
   background-color: rgb(243, 243, 243);
   min-width: 320px;
-  min-height: 100vh;
 }
 
 button,
@@ -40,5 +37,5 @@ input {
 .container {
   width: min(80rem, 100%);
   margin-inline: auto;
-  padding: 0 1rem;
+  padding: 2.25rem 1rem;
 }

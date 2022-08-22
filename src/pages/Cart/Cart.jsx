@@ -10,11 +10,15 @@ import {
   Stack,
 } from '@mui/material';
 import { DeleteForever, ShoppingCartCheckout } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../components/CartProvider/CartProvider';
+import { useUser } from '../../user/UserProvider';
 import CartItem from '../../components/CartItem/CartItem';
 import './Cart.css';
 
 function Cart() {
+  const navigate = useNavigate();
+  const { user } = useUser();
   const { cart, clearCart } = useCart();
 
   const TAX_RATE = 0.19;
@@ -50,6 +54,14 @@ function Cart() {
   const invoiceSubtotal = subtotal(rows);
   const invoiceTaxes = TAX_RATE * invoiceSubtotal;
   const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+
+  const handleCheckout = () => {
+    if (!user) {
+      navigate('/login', { state: { from: '/cart' } });
+    } else {
+      navigate('/checkout', { state: { success: true }, replace: true });
+    }
+  };
 
   if (cart.length === 0 || !cart)
     return (
@@ -135,6 +147,7 @@ function Cart() {
             variant="contained"
             endIcon={<ShoppingCartCheckout />}
             color="primary"
+            onClick={() => handleCheckout()}
             sx={{ width: 220 }}
           >
             CHECKOUT

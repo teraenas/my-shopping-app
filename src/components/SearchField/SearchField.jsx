@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Input, InputAdornment, FormControl } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
+import { useSearch } from '../SearchProvider/SearchProvider';
 import './SearchField.css';
 
-function SearchField({ setSearchTerm }) {
-  const [searchInput, setSearchInput] = useState('');
+function SearchField() {
+  const { searchTerm, setSearchTerm } = useSearch();
 
-  useEffect(() => {
-    setSearchTerm(searchInput);
-  }, [searchInput]);
+  useEffect(() => setSearchTerm(''), []);
 
   return (
     <FormControl id="search-field">
       <Input
         id="search-input"
-        sx={{ ml: 1 }}
         placeholder="Search Products"
         startAdornment={
           <InputAdornment position="start">
             <SearchOutlined />
           </InputAdornment>
         }
-        value={searchInput}
-        onChange={e => setSearchInput(e.target.value)}
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
       />
     </FormControl>
   );
