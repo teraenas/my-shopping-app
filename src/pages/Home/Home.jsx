@@ -20,6 +20,7 @@ function Home({ productList, error }) {
         </div>
       </section>
     );
+
   return (
     <section className="product-page">
       <div className="container">{error}</div>

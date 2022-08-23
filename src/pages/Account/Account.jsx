@@ -9,6 +9,7 @@ function Account() {
   const { user, logOut } = useUser();
 
   if (!user) return <Navigate to="/login" replace />;
+
   return (
     <section className="account-page">
       <div className="container">

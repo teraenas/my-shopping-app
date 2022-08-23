@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Link } from 'react-router-dom';
 import {
   FormControl,
   InputLabel,
@@ -32,12 +32,19 @@ function LogIn() {
   useEffect(() => setError(null), []);
 
   if (user) return <Navigate to={state?.from || '/'} replace />;
+
   return (
     <section className="login-page">
       <div className="container">
+        <Link to="/" className="logo">
+          shopApp
+        </Link>
         <Box component="form" className="login-form">
           <h1>Sign in</h1>
           {error && <Alert severity="error">{error}</Alert>}
+          {state?.redirectMessage && (
+            <Alert severity="info">{state?.redirectMessage}</Alert>
+          )}
           <FormControl sx={{ m: 1 }} variant="standard">
             <TextField
               id="email-input"

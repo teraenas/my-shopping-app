@@ -10,13 +10,15 @@ import {
   Stack,
 } from '@mui/material';
 import { DeleteForever, ShoppingCartCheckout } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../../components/CartProvider/CartProvider';
 import { useUser } from '../../user/UserProvider';
+import requireLogin from '../../util/requireLogin';
 import CartItem from '../../components/CartItem/CartItem';
 import './Cart.css';
 
 function Cart() {
+  const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
   const { cart, clearCart } = useCart();
@@ -57,8 +59,11 @@ function Cart() {
 
   const handleCheckout = () => {
     if (!user) {
-      navigate('/login', { state: { from: '/cart' } });
+      requireLogin(location, navigate);
     } else {
+      //send cart to server, await response, pass response to state
+      //if success, clear cart
+      clearCart();
       navigate('/checkout', { state: { success: true }, replace: true });
     }
   };

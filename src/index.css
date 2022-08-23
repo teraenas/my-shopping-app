@@ -27,15 +27,22 @@ a {
 body {
   background-color: rgb(243, 243, 243);
   min-width: 320px;
-}
-
-button,
-input {
-  font: inherit;
+  color: var(--clr-text-dark);
 }
 
 .container {
   width: min(80rem, 100%);
   margin-inline: auto;
   padding: 2.25rem 1rem;
+}
+
+.styled-link {
+  padding: 0.8rem 1rem;
+  color: white;
+  background-color: var(--clr-theme);
+  border-radius: 4px;
+}
+
+.styled-link:hover {
+  background-color: #1565c0;
 }

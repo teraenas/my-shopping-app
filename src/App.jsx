@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
+import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
@@ -22,16 +22,17 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <Routes>
-        <Route
-          path="/"
-          element={<Home productList={productList} error={error} />}
-        />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/account" element={<Account />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={<Home productList={productList} error={error} />}
+          />
+          <Route path="account" element={<Account />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
+        </Route>
         <Route path="/*" element={<h1>Not Found</h1>} />
       </Routes>
       <Footer />
